@@ -30,6 +30,22 @@ class Brain
         operatorChosen = false
     }
     
+    func add(operand digit: String) -> String
+    {
+        let returnString: String
+        if !operatorChosen
+        {
+            operand1 += digit
+            returnString = operand1
+        }
+        else
+        {
+            operand2 += digit
+            returnString = operand2
+        }
+        return returnString
+    }
+    
     func performCalculationIfPossible(specificOperator: String) -> String
     {
         operand1AsNumber = Double(operand1)!
@@ -61,7 +77,6 @@ class Brain
         return answer
     }
     
-    
     func clearBrain()
     {
         answer = ""
@@ -72,5 +87,6 @@ class Brain
         answerAsNumber = 0.0
         operand1AsNumber = 0.0
         operand2AsNumber = 0.0
+        operatorChosen = false
     }
 }
