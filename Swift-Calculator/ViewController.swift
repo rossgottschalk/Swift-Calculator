@@ -13,8 +13,6 @@ class ViewController: UIViewController
     @IBOutlet weak var displayLabel: UILabel!
     
     var calcBrain = Brain()
-    var firstDigit = false
-    
     
     override func viewDidLoad()
     {
@@ -22,28 +20,22 @@ class ViewController: UIViewController
         calcBrain.operatorType = "not selected"
         displayLabel.text = ""
     }
-   
-    override func didReceiveMemoryWarning()
     
+    override func didReceiveMemoryWarning()
+        
     {
         super.didReceiveMemoryWarning()
     }
-
-    @IBAction func numberTapped(_ sender: AnyObject)
+    
+    @IBAction func numberTapped(_ sender: UIButton)
     {
-        var number = sender.currentTitle!
-        if !firstDigit
-        {
-            displayLabel.text = number
-            firstDigit = false
-        }
-        else
-        {
-            displayLabel.text = displayLabel.text! + "\(number)"
-        }
+        let number = sender.currentTitle!
+        let newDisplayText = calcBrain.add(operand: number)
+        displayLabel.text = newDisplayText
+        
     }
     
-    @IBAction func operatorTapped(_ sender: AnyObject)
+    @IBAction func operatorTapped(_ sender: UIButton)
     {
         calcBrain.operatorChosen = true
         calcBrain.operatorType = sender.currentTitle!
@@ -54,7 +46,7 @@ class ViewController: UIViewController
         let theAnswer = calcBrain.performCalculationIfPossible(specificOperator: calcBrain.operatorType)
         displayLabel.text = theAnswer
     }
-
+    
     @IBAction func clearTapped(_ sender: AnyObject)
     {
         calcBrain.clearBrain()
